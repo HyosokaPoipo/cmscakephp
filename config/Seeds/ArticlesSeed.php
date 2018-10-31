@@ -26,7 +26,7 @@ class ArticlesSeed extends AbstractSeed
             'body' => 'this is the body of my first post',
             'published' => true,
             'created' => Time::now(),
-            'modified' => Time::now()git 
+            'modified' => Time::now()
 
         ];
 
