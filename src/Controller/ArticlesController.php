@@ -1,6 +1,6 @@
 <?php
 namespace App\Controller;
-
+use Cake\Log\Log;
 use App\Controller\AppController;
 
 /**
@@ -24,7 +24,7 @@ class ArticlesController extends AppController
             'contain' => ['Users']
         ];
         $articles = $this->paginate($this->Articles);
-
+        Log::debug($articles);
         $this->set(compact('articles'));
     }
 
