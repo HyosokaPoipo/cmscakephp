@@ -1,10 +1,11 @@
 <?php
 use Migrations\AbstractSeed;
+use Cake\I18n\Time;
 
 /**
- * /help seed.
+ * Users seed.
  */
-class adiSeed extends AbstractSeed
+class UsersSeed extends AbstractSeed
 {
     /**
      * Run Method.
@@ -18,9 +19,16 @@ class adiSeed extends AbstractSeed
      */
     public function run()
     {
-        $data = [];
+        $data = [
+            [
+             'email' => 'cakephp@poipo.com', 
+             'password' => 'sekret', 
+             'created' => new Time(), 
+             'modified' => new Time()
+            ]
+        ];
 
-        $table = $this->table('adi_table');
+        $table = $this->table('users');
         $table->insert($data)->save();
     }
 }
