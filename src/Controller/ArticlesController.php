@@ -109,4 +109,27 @@ class ArticlesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function tags()
+    {
+        Log::debug('executing tags in ArticlesController');
+        // Get all of request parameter
+        $tags = $this->request->getParam('pass');
+        Log::debug($tags);
+
+        // Use the articleTable to find tagged articles.
+        // $articles = $this->Articles->find('tagged', [
+        //     'tags' => $tags
+        // ]);
+        $articles = [
+            'hello',
+            'maryadi'
+        ];
+
+        // Pass variables to the view template in Template/Articles/tags
+        $this->set([
+            'articles' => $articles,
+            'tags' => $tags
+        ]);
+    }
 }
