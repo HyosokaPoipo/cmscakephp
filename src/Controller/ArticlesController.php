@@ -110,11 +110,11 @@ class ArticlesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function tags()
+    public function tags(...$tags)
     {
         Log::debug('executing tags in ArticlesController');
         // Get all of request parameter
-        $tags = $this->request->getParam('pass');
+        // $tags = $this->request->getParam('pass');
         Log::debug($tags);
 
         // Use the articleTable to find tagged articles.
