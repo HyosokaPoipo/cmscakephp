@@ -44,6 +44,8 @@ class TagsTable extends Table
         $this->hasMany('ArticleTags', [
             'foreignKey' => 'tag_id'
         ]);
+
+        $this->belongsToMany('Tags'); // Tag ini bakalan konek kebeberapa article
     }
 
     /**

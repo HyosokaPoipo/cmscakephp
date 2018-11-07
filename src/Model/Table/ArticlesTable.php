@@ -101,4 +101,9 @@ class ArticlesTable extends Table
 
         return $rules;
     }
+
+    // The $query argument is a query builder instance
+    // The $options array will contain the 'tags' option we passed
+    // to find('tagged') in our controller action.
+    
 }

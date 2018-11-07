@@ -23,6 +23,7 @@
             echo $this->Form->control('title');
             echo $this->Form->control('slug');
             echo $this->Form->control('body');
+            echo $this->Form->control('tags.__ids', ['options' => $tags]);
             echo $this->Form->control('published');
         ?>
     </fieldset>

@@ -41,6 +41,8 @@ class ArticlesController extends AppController
             'contain' => ['Users', 'ArticleTags']
         ]);
 
+        Log::debug($article);
+
         $this->set('article', $article);
     }
 
@@ -51,6 +53,7 @@ class ArticlesController extends AppController
      */
     public function add()
     {
+        Log::debug('add is executed on articleController');
         $article = $this->Articles->newEntity();
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
@@ -62,7 +65,12 @@ class ArticlesController extends AppController
             $this->Flash->error(__('The article could not be saved. Please, try again.'));
         }
         $users = $this->Articles->Users->find('list', ['limit' => 200]);
-        $this->set(compact('article', 'users'));
+
+        // fetch tags list
+        $tags = $this->Articles->Tags->find('list');
+        Log::debug('isi tags di add new articles');
+        Log::debug($tags);
+        $this->set(compact('article', 'users', 'tags'));
     }
 
     /**
