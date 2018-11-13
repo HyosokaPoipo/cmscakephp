@@ -50,7 +50,7 @@ class ArticlesTable extends Table
             'foreignKey' => 'article_id'
         ]);
         
-        $this->belongsToMany('Tags'); // Tag ini bakalan konek kebeberapa article
+        $this->belongsToMany('Tags'); // Tag ini bakalan konek kebeberapa article, many to many
     }
 
     /**
@@ -107,5 +107,30 @@ class ArticlesTable extends Table
     // The $query argument is a query builder instance
     // The $options array will contain the 'tags' option we passed
     // to find('tagged') in our controller action.
+    public function findTagged(Query $query, array $options) {
+        $columns = [
+            'Articles.id',
+            'Articles.user_id',
+            'Articles.title',
+            'Articles.body',
+            'Articles.published',
+            'Articles.created',
+            'Articles.slug'
+        ];
+
+        $query = $query->select($columns)->distinct($columns);
+        if (empty($options['tags'])) {
+            // If there is no tags provided
+            // find articles that have no tags.
+            $query->leftJoinWith('Tags')
+            ->where(['Tags.title IS' => NULL]);
+        } else {
+            // Find articles that have one or more of the provided tags
+            $query->innerJoinWith('Tags')
+            ->where(['Tags.title IN' => $options['tags']]);
+        }
+
+        return $query->group(['Articles.id']);
+    }
 
 }
