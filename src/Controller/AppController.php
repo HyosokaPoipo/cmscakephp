@@ -72,4 +72,10 @@ class AppController extends Controller
         ]);
         $this->Auth->allow(['display', 'view', 'index']);
     }
+
+    public function isAuthorized($user) 
+    {
+        // by default deny access
+        return false;
+    }
 }
