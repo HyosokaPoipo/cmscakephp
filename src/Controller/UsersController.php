@@ -12,6 +12,10 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
+    public function initialize() {
+        parent::initialize();
+        $this->Auth->allow(['logout']);
+    }
 
     /**
      * Index method
@@ -116,5 +120,12 @@ class UsersController extends AppController
             }
         $this->Flash->error('Your username or password is incorrect.');
         }
+    }
+
+    // logout
+    public function logout() 
+    {
+        $this->Flash->success('You are now log out.');
+        return $this->redirect($this->Auth->logout());
     }
 }
