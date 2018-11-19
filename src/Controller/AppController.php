@@ -51,5 +51,25 @@ class AppController extends Controller
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
         //$this->loadComponent('Security');
+
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'password'
+                    ]
+                ]
+            ],
+            'loginAction' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ],
+            // use isAuthorized in Controllers
+            'authorize' => ['controller'],
+            // Jika belum terauthentikasi, kembali kepage sebelumnya
+            'unauthorizedRedirect' => $this->referer()            
+        ]);
+        $this->Auth->allow(['display', 'view', 'index']);
     }
 }
