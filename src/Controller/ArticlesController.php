@@ -129,6 +129,7 @@ class ArticlesController extends AppController
         $articles = $this->Articles->find('tagged', [
             'tags' => $tags
         ]);
+        Log::debug($articles);
         
 
         // Pass variables to the view template in Template/Articles/tags

@@ -5,6 +5,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Log\Log;
 
 /**
  * Articles Model
@@ -108,6 +109,8 @@ class ArticlesTable extends Table
     // The $options array will contain the 'tags' option we passed
     // to find('tagged') in our controller action.
     public function findTagged(Query $query, array $options) {
+        Log::debug('isi query');
+        Log::debug($query);
         $columns = [
             'Articles.id',
             'Articles.user_id',
@@ -130,6 +133,8 @@ class ArticlesTable extends Table
             ->where(['Tags.title IN' => $options['tags']]);
         }
 
+        Log::debug('findtagged ');
+        Log::debug($query);
         return $query->group(['Articles.id']);
     }
 
